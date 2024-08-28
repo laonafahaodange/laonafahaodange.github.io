@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Posts on 老衲法号蛋哥</title>
+        <link>https://example.com/post/</link>
+        <description>Recent content in Posts on 老衲法号蛋哥</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>老衲法号蛋哥</copyright>
+        <lastBuildDate>Wed, 28 Aug 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Hello World</title>
+        <link>https://example.com/p/slug_test/</link>
+        <pubDate>Wed, 28 Aug 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://example.com/p/slug_test/</guid>
+        <description>&lt;img src="https://example.com/p/slug_test/cover.jpg" alt="Featured image of post Hello World" /&gt;&lt;h2 id=&#34;测试&#34;&gt;测试
+&lt;/h2&gt;&lt;p&gt;Hello World.&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
