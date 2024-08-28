@@ -2,19 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Posts on 老衲法号蛋哥</title>
-        <link>https://example.com/post/</link>
+        <link>https://laonafahaodange.github.io/post/</link>
         <description>Recent content in Posts on 老衲法号蛋哥</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>老衲法号蛋哥</copyright>
-        <lastBuildDate>Wed, 28 Aug 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>Hello World</title>
-        <link>https://example.com/p/slug_test/</link>
+        <lastBuildDate>Wed, 28 Aug 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://laonafahaodange.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>【随笔】2024.08.28</title>
+        <link>https://laonafahaodange.github.io/p/informal-essay/</link>
         <pubDate>Wed, 28 Aug 2024 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/p/slug_test/</guid>
-        <description>&lt;img src="https://example.com/p/slug_test/cover.jpg" alt="Featured image of post Hello World" /&gt;&lt;h2 id=&#34;测试&#34;&gt;测试
-&lt;/h2&gt;&lt;p&gt;Hello World.&lt;/p&gt;
+        <guid>https://laonafahaodange.github.io/p/informal-essay/</guid>
+        <description>&lt;img src="https://laonafahaodange.github.io/p/informal-essay/cover.jpg" alt="Featured image of post 【随笔】2024.08.28" /&gt;&lt;h1 id=&#34;随笔&#34;&gt;随笔
+&lt;/h1&gt;&lt;p&gt;明天就要考试了今天还在搭博客。真的是越到考试越浪~&lt;/p&gt;
+&lt;p&gt;第一篇博客，以后慢慢往这里填充内容吧。&lt;/p&gt;
 </description>
         </item>
         
