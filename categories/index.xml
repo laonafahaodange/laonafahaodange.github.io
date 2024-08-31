@@ -7,7 +7,15 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>老衲法号蛋哥</copyright>
-        <lastBuildDate>Fri, 30 Aug 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://laonafahaodange.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 31 Aug 2024 18:07:50 +0800</lastBuildDate><atom:link href="https://laonafahaodange.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>实践</title>
+        <link>https://laonafahaodange.github.io/categories/%E5%AE%9E%E8%B7%B5/</link>
+        <pubDate>Sat, 31 Aug 2024 18:07:50 +0800</pubDate>
+        
+        <guid>https://laonafahaodange.github.io/categories/%E5%AE%9E%E8%B7%B5/</guid>
+        <description>&lt;img src="https://laonafahaodange.github.io/categories/%E5%AE%9E%E8%B7%B5/cover.jpg" alt="Featured image of post 实践" /&gt;</description>
+        </item>
+        <item>
         <title>随笔</title>
         <link>https://laonafahaodange.github.io/categories/%E9%9A%8F%E7%AC%94/</link>
         <pubDate>Fri, 30 Aug 2024 00:00:00 +0000</pubDate>
@@ -46,14 +54,6 @@
         
         <guid>https://laonafahaodange.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</guid>
         <description>&lt;img src="https://laonafahaodange.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/cover.jpg" alt="Featured image of post 深度学习" /&gt;</description>
-        </item>
-        <item>
-        <title>实践</title>
-        <link>https://laonafahaodange.github.io/categories/%E5%AE%9E%E8%B7%B5/</link>
-        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-        
-        <guid>https://laonafahaodange.github.io/categories/%E5%AE%9E%E8%B7%B5/</guid>
-        <description>&lt;img src="https://laonafahaodange.github.io/categories/%E5%AE%9E%E8%B7%B5/cover.jpg" alt="Featured image of post 实践" /&gt;</description>
         </item>
         
     </channel>
