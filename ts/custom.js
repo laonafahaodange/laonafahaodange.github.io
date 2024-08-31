@@ -1,1 +1,31 @@
-(()=>{var l=document.querySelectorAll(".article-content div.highlight"),a="\u{1F4C4}\u62F7\u8D1D",r="\u5DF2\u62F7\u8D1D!";l.forEach(e=>{let t=document.createElement("button");t.innerHTML=a,t.classList.add("copyCodeButton"),e.appendChild(t);let n=e.querySelector("code[data-lang]"),d=n.getAttribute("data-lang");if(!n)return;t.addEventListener("click",()=>{navigator.clipboard.writeText(n.textContent).then(()=>{t.textContent=r,setTimeout(()=>{t.textContent=a},1e3)}).catch(c=>{alert(c),console.log("Something went wrong",c)})});let o=document.createElement("button");o.innerHTML=d.toUpperCase()+"&nbsp;&nbsp;",o.classList.add("languageCodeButton"),e.appendChild(o)});new StackColorScheme(document.getElementById("dark-mode-toggle"));})();
+(() => {
+  // <stdin>
+  var highlights = document.querySelectorAll(".article-content div.highlight");
+  var copyText = `\u{1F4C4}\u62F7\u8D1D`;
+  var copiedText = `\u5DF2\u62F7\u8D1D!`;
+  highlights.forEach((highlight) => {
+    const copyButton = document.createElement("button");
+    copyButton.innerHTML = copyText;
+    copyButton.classList.add("copyCodeButton");
+    highlight.appendChild(copyButton);
+    const codeBlock = highlight.querySelector("code[data-lang]");
+    const lang = codeBlock.getAttribute("data-lang");
+    if (!codeBlock) return;
+    copyButton.addEventListener("click", () => {
+      navigator.clipboard.writeText(codeBlock.textContent).then(() => {
+        copyButton.textContent = copiedText;
+        setTimeout(() => {
+          copyButton.textContent = copyText;
+        }, 1e3);
+      }).catch((err) => {
+        alert(err);
+        console.log("Something went wrong", err);
+      });
+    });
+    const languageButton = document.createElement("button");
+    languageButton.innerHTML = lang.toUpperCase() + "&nbsp;&nbsp;";
+    languageButton.classList.add("languageCodeButton");
+    highlight.appendChild(languageButton);
+  });
+  new StackColorScheme(document.getElementById("dark-mode-toggle"));
+})();
