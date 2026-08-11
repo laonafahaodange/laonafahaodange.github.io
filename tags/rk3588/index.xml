@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>RK3588 on 老衲法号蛋哥</title><link>https://laonafahaodange.github.io/tags/rk3588/</link><description>Recent content in RK3588 on 老衲法号蛋哥</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>老衲法号蛋哥</copyright><lastBuildDate>Fri, 09 Jan 2026 01:02:54 +0800</lastBuildDate><atom:link href="https://laonafahaodange.github.io/tags/rk3588/index.xml" rel="self" type="application/rss+xml"/><item><title>香橙派RK3588s部署大模型</title><link>https://laonafahaodange.github.io/p/practice-20260108/</link><pubDate>Fri, 09 Jan 2026 01:02:54 +0800</pubDate><guid>https://laonafahaodange.github.io/p/practice-20260108/</guid><description>&lt;img src="https://laonafahaodange.github.io/p/practice-20260108/cover.jpg" alt="Featured image of post 香橙派RK3588s部署大模型" />&lt;h1 id="香橙派rk3588s部署大模型">香橙派RK3588s部署大模型
+&lt;/h1>&lt;h2 id="香橙派rk3588s更新npu驱动">香橙派RK3588s更新npu驱动
+&lt;/h2>&lt;p>香橙派系统：ubuntu20.04，内核6.1.43&lt;/p>
+&lt;p>通过以下命令查看NPU驱动版本：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-SHELL" data-lang="SHELL">&lt;span class="line">&lt;span class="cl">sudo cat /sys/kernel/debug/rknpu/version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>需要npu驱动版本0.9.8，我这里板子上显示版本是0.9.6，需要升级。&lt;/p>
+&lt;h3 id="npu驱动更新步骤">NPU驱动更新步骤
+&lt;/h3>&lt;h4 id="pc机下载驱动压缩包">PC机下载驱动压缩包
+&lt;/h4>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git clone https://github.com/airockchip/rknn-llm.git
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>解压目录&lt;code>/rknn-llm-release-v1.2.1/rknpu-driver&lt;/code>下的&lt;code>rknpu_driver_0.9.8_20241009.tar.bz2&lt;/code>，后面会用到。&lt;/p>
+&lt;h4 id="编译内核前的环境配置参考香橙派文档">编译内核前的环境配置（参考香橙派文档）
+&lt;/h4>&lt;p>在linux环境下&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-SHELL" data-lang="SHELL">&lt;span class="line">&lt;span class="cl">sudo apt-get update
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt-get install -y git
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git clone https://github.com/orangepi-xunlong/orangepi-build.git -b next
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> orangepi-build
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo ./build.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>按以下选项配置&lt;/p>
+&lt;ol>
+&lt;li>选择 Kernel package（内核包）；&lt;/li>
+&lt;li>选择 do not change（不修改内核配置）&lt;/li>
+&lt;li>选择板卡 orangepi5；&lt;/li>
+&lt;li>选择第一项 current&lt;/li>
+&lt;/ol>
+&lt;p>关闭内核源码自动同步&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-SHELL" data-lang="SHELL">&lt;span class="line">&lt;span class="cl">sudo gedit userpatches/config-default.conf
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">IGNORE_UPDATES&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;yes&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h4 id="替换npu驱动并重新编译">替换NPU驱动并重新编译
+&lt;/h4>&lt;p>复制&lt;code>rknpu_driver_0.9.8_20241009.tar.bz2&lt;/code>解压出来的&lt;code>rknn-llm-release-v1.2.1/rknpu-driver/drivers/rknpu&lt;/code>下的文件到&lt;code>orangepi-build/kernel/orange-pi-6.1-rk35xx/drivers/rknpu&lt;/code>中。&lt;br>
+我这里重新编译的时候遇到了两处问题，这里先解决这两处问题再编译。&lt;/p>
+&lt;ol>
+&lt;li>修改&lt;code>orangepi-build/kernel/orange-pi-6.1-rk35xx/include/linux/mm.h&lt;/code>，添加以下代码
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-C++" data-lang="C++">&lt;span class="line">&lt;span class="cl">&lt;span class="k">static&lt;/span> &lt;span class="kr">inline&lt;/span> &lt;span class="kt">void&lt;/span> &lt;span class="nf">vm_flags_set&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">struct&lt;/span> &lt;span class="nc">vm_area_struct&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">vma&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">vm_flags_t&lt;/span> &lt;span class="n">flags&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">vma&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">vm_flags&lt;/span> &lt;span class="o">|=&lt;/span> &lt;span class="n">flags&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">static&lt;/span> &lt;span class="kr">inline&lt;/span> &lt;span class="kt">void&lt;/span> &lt;span class="nf">vm_flags_clear&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">struct&lt;/span> &lt;span class="nc">vm_area_struct&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">vma&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">vm_flags_t&lt;/span> &lt;span class="n">flags&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">vma&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">vm_flags&lt;/span> &lt;span class="o">&amp;amp;=&lt;/span> &lt;span class="o">~&lt;/span>&lt;span class="n">flags&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>直接搜索&lt;code>rknpu_devfreq.c&lt;/code>，注释掉第237行&lt;code>.set_soc_info = rockchip_opp_set_low_length&lt;/code>&lt;br>
+然后重新编译内核（同样按照上述配置）&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-SHELL" data-lang="SHELL">&lt;span class="line">&lt;span class="cl">sudo ./build.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>编译之后在路径&lt;code>orangepi-build/output/debs&lt;/code>会生成文件&lt;code>linux-image-current-rockchip-rk3588_1.1.8_arm64.deb&lt;/code>&lt;/p>
+&lt;h3 id="rk3588s开发板安装驱动">RK3588s开发板安装驱动
+&lt;/h3>&lt;p>在开发板上直接安装&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-SHELL" data-lang="SHELL">&lt;span class="line">&lt;span class="cl">sudo dpkg -i linux-image-current-rockchip-rk3588_1.1.8_arm64.deb
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>然后重启开发板。查看NPU驱动版本&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-SHELL" data-lang="SHELL">&lt;span class="line">&lt;span class="cl">sudo cat /sys/kernel/debug/rknpu/version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>显示0.9.8，则更新成功。&lt;/p>
+&lt;h2 id="pc机进行模型转换">PC机进行模型转换
+&lt;/h2>&lt;h3 id="rknn-llm">rknn-llm
+&lt;/h3>&lt;p>现在PC机创建虚拟环境，我这里用的python版本是3.10&lt;/p>
+&lt;p>克隆rknn-llm仓库，cd到目录下安装rknn-llm的whl文件&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">git clone https://github.com/airockchip/rknn-llm.git
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> rknn-llm/rkllm-toolkit
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">pip3 install rkllm_toolkit-1.2.1-cp310-cp310-linux_x86_64.whl
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="hugging-face下载模型权重">hugging face下载模型权重
+&lt;/h3>&lt;p>安装huggingface-cli，导入镜像源，下载模型权重&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-SHELL" data-lang="SHELL">&lt;span class="line">&lt;span class="cl">pip install -U huggingface_hub
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">export&lt;/span> &lt;span class="nv">HF_ENDPOINT&lt;/span>&lt;span class="o">=&lt;/span>https://hf-mirror.com
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">huggingface-cli download deepseek-ai/DeepSeek-R1-Distill-Qwen-7B --local-dir . --local-dir-use-symlinks False
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>参数&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>huggingface-cli download&lt;/code>&lt;/td>
+&lt;td>Hugging Face 官方命令行工具的下载命令&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>deepseek-ai/DeepSeek-R1-Distill-Qwen-7B&lt;/code>&lt;/td>
+&lt;td>要下载的模型标识符&lt;br>• &lt;code>deepseek-ai&lt;/code>：组织名称&lt;br>• &lt;code>DeepSeek-R1-Distill-Qwen-7B&lt;/code>：具体的模型名称&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--local-dir .&lt;/code>&lt;/td>
+&lt;td>指定下载到当前目录&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--local-dir-use-symlinks False&lt;/code>&lt;/td>
+&lt;td>禁用符号链接，直接复制文件到目标目录&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>如果不清楚模型名称，可以先去&lt;code>https://hf-mirror.com&lt;/code>，这里以Qwen3为例，搜索&lt;code>qwen3&lt;/code>，找到&lt;code>Qwen/Qwen3-0.6B&lt;/code>后点击进去，&lt;code>Qwen/Qwen3-0.6B&lt;/code>旁边有个复制按钮，这个就是我们要找的模型名称。&lt;/p>
+&lt;h3 id="模型权重转换">模型权重转换
+&lt;/h3>&lt;p>参考&lt;code>rknn-llm/examples/DeepSeek-R1-Distill-Qwen-1.5B_Demo/export/export_rkllm.py&lt;/code>，修改&lt;code>modelpath&lt;/code>为下载好的模型权重路径。执行&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-SHELL" data-lang="SHELL">&lt;span class="line">&lt;span class="cl">python export_rkllm.py
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;blockquote>
+&lt;p>如果遇到报错&lt;code>AttributeError: module ‘pyarrow‘ has no attribute ‘PyExtensionType‘. Did you mean: ‘ExtensionType‘&lt;/code>，可以尝试降低pyarrow的版本，我记得当时我是降版本了，但是现在查看环境的时候发现还是新的版本，这里仅做记录。&lt;/p>
+&lt;/blockquote>
+&lt;p>执行后得到rkllm文件&lt;/p>
+&lt;h2 id="开发板部署">开发板部署
+&lt;/h2>&lt;h3 id="编译">编译
+&lt;/h3>&lt;p>开发板同样要克隆rknn-llm仓库，稍后编译用。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">git clone https://github.com/airockchip/rknn-llm.git
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>参考&lt;code>rknn-llm/examples/DeepSeek-R1-Distill-Qwen-1.5B_Demo/deploy/build-linux.sh&lt;/code>，配置&lt;code>GCC_COMPILER_PATH&lt;/code>，做以下修改&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>&lt;span class="c1"># Debug / Release / RelWithDebInfo&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">set&lt;/span> -e
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="o">[[&lt;/span> -z &lt;span class="si">${&lt;/span>&lt;span class="nv">BUILD_TYPE&lt;/span>&lt;span class="si">}&lt;/span> &lt;span class="o">]]&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">BUILD_TYPE&lt;/span>&lt;span class="o">=&lt;/span>Release
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">GCC_COMPILER_PATH&lt;/span>&lt;span class="o">=&lt;/span>aarch64-linux-gnu
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">C_COMPILER&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">GCC_COMPILER_PATH&lt;/span>&lt;span class="si">}&lt;/span>-gcc
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">CXX_COMPILER&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">GCC_COMPILER_PATH&lt;/span>&lt;span class="si">}&lt;/span>-g++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">STRIP_COMPILER&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">GCC_COMPILER_PATH&lt;/span>&lt;span class="si">}&lt;/span>-strip
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">TARGET_ARCH&lt;/span>&lt;span class="o">=&lt;/span>aarch64
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">TARGET_PLATFORM&lt;/span>&lt;span class="o">=&lt;/span>linux
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="o">[[&lt;/span> -n &lt;span class="si">${&lt;/span>&lt;span class="nv">TARGET_ARCH&lt;/span>&lt;span class="si">}&lt;/span> &lt;span class="o">]]&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">TARGET_PLATFORM&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">TARGET_PLATFORM&lt;/span>&lt;span class="si">}&lt;/span>_&lt;span class="si">${&lt;/span>&lt;span class="nv">TARGET_ARCH&lt;/span>&lt;span class="si">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">ROOT_PWD&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="k">$(&lt;/span> &lt;span class="nb">cd&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="k">$(&lt;/span> dirname &lt;span class="nv">$0&lt;/span> &lt;span class="k">)&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="nb">cd&lt;/span> -P &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="k">$(&lt;/span> dirname &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$SOURCE&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="k">)&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="nb">pwd&lt;/span> &lt;span class="k">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">BUILD_DIR&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">ROOT_PWD&lt;/span>&lt;span class="si">}&lt;/span>/build/build_&lt;span class="si">${&lt;/span>&lt;span class="nv">TARGET_PLATFORM&lt;/span>&lt;span class="si">}&lt;/span>_&lt;span class="si">${&lt;/span>&lt;span class="nv">BUILD_TYPE&lt;/span>&lt;span class="si">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="o">[[&lt;/span> ! -d &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">BUILD_DIR&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">]]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> mkdir -p &lt;span class="si">${&lt;/span>&lt;span class="nv">BUILD_DIR&lt;/span>&lt;span class="si">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> &lt;span class="si">${&lt;/span>&lt;span class="nv">BUILD_DIR&lt;/span>&lt;span class="si">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cmake ../.. &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> -DCMAKE_SYSTEM_PROCESSOR&lt;span class="o">=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">TARGET_ARCH&lt;/span>&lt;span class="si">}&lt;/span> &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> -DCMAKE_SYSTEM_NAME&lt;span class="o">=&lt;/span>Linux &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> -DCMAKE_C_COMPILER&lt;span class="o">=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">C_COMPILER&lt;/span>&lt;span class="si">}&lt;/span> &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> -DCMAKE_CXX_COMPILER&lt;span class="o">=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">CXX_COMPILER&lt;/span>&lt;span class="si">}&lt;/span> &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> -DCMAKE_BUILD_TYPE&lt;span class="o">=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">BUILD_TYPE&lt;/span>&lt;span class="si">}&lt;/span> &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> -DCMAKE_POSITION_INDEPENDENT_CODE&lt;span class="o">=&lt;/span>ON
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">make -j4
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">make install
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>执行编译&lt;code>./build-linux.sh&lt;/code>&lt;/p>
+&lt;h3 id="部署测试">部署测试
+&lt;/h3>&lt;p>复制rkllm模型文件至目录&lt;code>rknn-llm/examples/DeepSeek-R1-Distill-Qwen-1.5B_Demo/deploy/&lt;/code>，同时进入该目录&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-SHELL" data-lang="SHELL">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">export&lt;/span> &lt;span class="nv">LD_LIBRARY_PATH&lt;/span>&lt;span class="o">=&lt;/span>./lib
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">./llm_demo ~/DeepSeek-R1-Distill-Qwen-1.5B_w4a16_RK3576.rkllm &lt;span class="m">128&lt;/span> &lt;span class="m">512&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;blockquote>
+&lt;p>我的开发板ram应该只有4G,实测4B以上模型直接重启，因此最多只测试了Qwen3-1.7B&lt;/p>
+&lt;/blockquote>
+&lt;hr>
+&lt;p>参考:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://www.cnblogs.com/yijunchenhui/p/19030693" target="_blank" rel="noopener"
+>香橙派 RK3588 部署 DeepSeek &lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://www.cnblogs.com/yijunchenhui/p/19027716" target="_blank" rel="noopener"
+>香橙派 RK3588 使用 RKLLM 更新 NPU 驱动教程&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://blog.csdn.net/weixin_44998018/article/details/149860806" target="_blank" rel="noopener"
+>AttributeError: module ‘pyarrow‘ has no attribute ‘PyExtensionType‘. Did you mean: ‘ExtensionType‘&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://blog.csdn.net/pkyang2004/article/details/147901802" target="_blank" rel="noopener"
+>RK3588成功部署 Qwen3-1.7B模型&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://doc.embedfire.com/linux/rk356x/Ai/zh/latest/lubancat_ai/example/deepseek.html#" target="_blank" rel="noopener"
+>Luban Cat DeepSeek-R1&lt;/a>&lt;/li>
+&lt;/ul></description></item></channel></rss>

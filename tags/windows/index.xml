@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Windows on 老衲法号蛋哥</title><link>https://laonafahaodange.github.io/tags/windows/</link><description>Recent content in Windows on 老衲法号蛋哥</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>老衲法号蛋哥</copyright><lastBuildDate>Wed, 14 Jan 2026 17:49:13 +0800</lastBuildDate><atom:link href="https://laonafahaodange.github.io/tags/windows/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows11访问银河麒麟操作系统共享文件夹</title><link>https://laonafahaodange.github.io/p/practice-20260114-2/</link><pubDate>Wed, 14 Jan 2026 17:49:13 +0800</pubDate><guid>https://laonafahaodange.github.io/p/practice-20260114-2/</guid><description>&lt;img src="https://laonafahaodange.github.io/p/practice-20260114-2/cover.jpg" alt="Featured image of post Windows11访问银河麒麟操作系统共享文件夹" />&lt;h1 id="windows11访问银河麒麟操作系统共享文件夹">Windows11访问银河麒麟操作系统共享文件夹
+&lt;/h1>&lt;p>银河麒麟操作系统为V10(SP1)。只记录流程，不涉及原理。&lt;/p>
+&lt;h2 id="前置工作">前置工作
+&lt;/h2>&lt;p>首先要确保银河麒麟和Windows11两端要能相互ping通。&lt;br>
+我这里遇到了Windows11 ping 银河麒麟的时候&lt;strong>无法访问目标主机&lt;/strong>的问题（银河麒麟 ping Windows11正常）。推测是防火墙的问题。&lt;br>
+打开&lt;code>设置&lt;/code>，找到&lt;code>安全中心&lt;/code>下的&lt;code>网络保护&lt;/code>，点击防火墙的&lt;code>高级配置&lt;/code>，找到&lt;code>icmp&lt;/code>项，把&lt;code>网络&lt;/code>修改为&lt;code>所有&lt;/code>即可。&lt;/p>
+&lt;h2 id="银河麒麟">银河麒麟
+&lt;/h2>&lt;ol>
+&lt;li>为了方便查找，在&lt;code>快速访问/本机共享/&lt;/code>下新建&lt;code>share&lt;/code>文件夹。&lt;/li>
+&lt;li>右键&lt;code>share&lt;/code>文件夹，选择&lt;code>共享文件夹&lt;/code>，去掉&lt;code>只读&lt;/code>，点击&lt;code>确定&lt;/code>，然后选择&lt;code>确定增加权限&lt;/code>&lt;/li>
+&lt;li>设置账号密码，这里我直接设置为系统登陆的账户和密码&lt;/li>
+&lt;li>打开终端，设置smb密码（&lt;code>&amp;lt;user&amp;gt;&lt;/code>替换成你的用户名），这里同样设置为系统登陆的密码&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-SHELL" data-lang="SHELL">&lt;span class="line">&lt;span class="cl">sudo smbpasswd -a &amp;lt;user&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="windows11">Windows11
+&lt;/h2>&lt;ol>
+&lt;li>打开&lt;code>此电脑&lt;/code>，点击&lt;code>映射网络驱动器&lt;/code>&lt;/li>
+&lt;li>在&lt;code>文件夹&lt;/code>选项中按照示例&lt;code>\\server\share&lt;/code>设置，&lt;code>server&lt;/code>即银河麒麟端的ip&lt;/li>
+&lt;/ol></description></item></channel></rss>

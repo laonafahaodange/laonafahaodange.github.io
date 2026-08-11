@@ -1,0 +1,799 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>实践 on 老衲法号蛋哥</title><link>https://laonafahaodange.github.io/categories/%E5%AE%9E%E8%B7%B5/</link><description>Recent content in 实践 on 老衲法号蛋哥</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>老衲法号蛋哥</copyright><lastBuildDate>Wed, 14 Jan 2026 17:49:13 +0800</lastBuildDate><atom:link href="https://laonafahaodange.github.io/categories/%E5%AE%9E%E8%B7%B5/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows11访问银河麒麟操作系统共享文件夹</title><link>https://laonafahaodange.github.io/p/practice-20260114-2/</link><pubDate>Wed, 14 Jan 2026 17:49:13 +0800</pubDate><guid>https://laonafahaodange.github.io/p/practice-20260114-2/</guid><description>&lt;img src="https://laonafahaodange.github.io/p/practice-20260114-2/cover.jpg" alt="Featured image of post Windows11访问银河麒麟操作系统共享文件夹" />&lt;h1 id="windows11访问银河麒麟操作系统共享文件夹">Windows11访问银河麒麟操作系统共享文件夹
+&lt;/h1>&lt;p>银河麒麟操作系统为V10(SP1)。只记录流程，不涉及原理。&lt;/p>
+&lt;h2 id="前置工作">前置工作
+&lt;/h2>&lt;p>首先要确保银河麒麟和Windows11两端要能相互ping通。&lt;br>
+我这里遇到了Windows11 ping 银河麒麟的时候&lt;strong>无法访问目标主机&lt;/strong>的问题（银河麒麟 ping Windows11正常）。推测是防火墙的问题。&lt;br>
+打开&lt;code>设置&lt;/code>，找到&lt;code>安全中心&lt;/code>下的&lt;code>网络保护&lt;/code>，点击防火墙的&lt;code>高级配置&lt;/code>，找到&lt;code>icmp&lt;/code>项，把&lt;code>网络&lt;/code>修改为&lt;code>所有&lt;/code>即可。&lt;/p>
+&lt;h2 id="银河麒麟">银河麒麟
+&lt;/h2>&lt;ol>
+&lt;li>为了方便查找，在&lt;code>快速访问/本机共享/&lt;/code>下新建&lt;code>share&lt;/code>文件夹。&lt;/li>
+&lt;li>右键&lt;code>share&lt;/code>文件夹，选择&lt;code>共享文件夹&lt;/code>，去掉&lt;code>只读&lt;/code>，点击&lt;code>确定&lt;/code>，然后选择&lt;code>确定增加权限&lt;/code>&lt;/li>
+&lt;li>设置账号密码，这里我直接设置为系统登陆的账户和密码&lt;/li>
+&lt;li>打开终端，设置smb密码（&lt;code>&amp;lt;user&amp;gt;&lt;/code>替换成你的用户名），这里同样设置为系统登陆的密码&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-SHELL" data-lang="SHELL">&lt;span class="line">&lt;span class="cl">sudo smbpasswd -a &amp;lt;user&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="windows11">Windows11
+&lt;/h2>&lt;ol>
+&lt;li>打开&lt;code>此电脑&lt;/code>，点击&lt;code>映射网络驱动器&lt;/code>&lt;/li>
+&lt;li>在&lt;code>文件夹&lt;/code>选项中按照示例&lt;code>\\server\share&lt;/code>设置，&lt;code>server&lt;/code>即银河麒麟端的ip&lt;/li>
+&lt;/ol></description></item><item><title>Python导出requirements.txt以及第三方库whl文件</title><link>https://laonafahaodange.github.io/p/practice-20260114/</link><pubDate>Wed, 14 Jan 2026 17:49:06 +0800</pubDate><guid>https://laonafahaodange.github.io/p/practice-20260114/</guid><description>&lt;img src="https://laonafahaodange.github.io/p/practice-20260114/cover.jpg" alt="Featured image of post Python导出requirements.txt以及第三方库whl文件" />&lt;h1 id="python导出requirementstxt以及第三方库whl文件">Python导出requirements.txt以及第三方库whl文件
+&lt;/h1>&lt;ol>
+&lt;li>cd至项目根目录&lt;/li>
+&lt;li>pip安装pipreqs（项目里会有很多 Python 库，但有些是系统自带的，有些是没用的，用这个只会导出你代码里真正 import 的第三方库）&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-SHELL" data-lang="SHELL">&lt;span class="line">&lt;span class="cl">pip install pipreqs -i https://pypi.tuna.tsinghua.edu.cn/simple
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="3">
+&lt;li>导出项目依赖&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">pipreqs ./ --encoding&lt;span class="o">=&lt;/span>utf8 --force
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>参数说明&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>./&lt;/code> ：表示在当前项目根目录生成requirements.txt&lt;/li>
+&lt;li>&lt;code>--encoding=utf8&lt;/code>：解决中文注释 / 路径的编码报错问题&lt;/li>
+&lt;li>&lt;code>--force&lt;/code>：强制覆盖已存在的requirements.txt文件&lt;/li>
+&lt;/ul>
+&lt;ol start="4">
+&lt;li>下载所有依赖的whl包到指定文件夹（这里以&lt;code>whl_packages &lt;/code>为例）&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">pip download -r requirements.txt -d ./whl_packages -i https://pypi.tuna.tsinghua.edu.cn/simple
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="5">
+&lt;li>离线安装依赖（部署时用）&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-SHELL" data-lang="SHELL">&lt;span class="line">&lt;span class="cl">pip install -r requirements.txt -f ./whl_packages --no-index
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>香橙派RK3588s部署大模型</title><link>https://laonafahaodange.github.io/p/practice-20260108/</link><pubDate>Fri, 09 Jan 2026 01:02:54 +0800</pubDate><guid>https://laonafahaodange.github.io/p/practice-20260108/</guid><description>&lt;img src="https://laonafahaodange.github.io/p/practice-20260108/cover.jpg" alt="Featured image of post 香橙派RK3588s部署大模型" />&lt;h1 id="香橙派rk3588s部署大模型">香橙派RK3588s部署大模型
+&lt;/h1>&lt;h2 id="香橙派rk3588s更新npu驱动">香橙派RK3588s更新npu驱动
+&lt;/h2>&lt;p>香橙派系统：ubuntu20.04，内核6.1.43&lt;/p>
+&lt;p>通过以下命令查看NPU驱动版本：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-SHELL" data-lang="SHELL">&lt;span class="line">&lt;span class="cl">sudo cat /sys/kernel/debug/rknpu/version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>需要npu驱动版本0.9.8，我这里板子上显示版本是0.9.6，需要升级。&lt;/p>
+&lt;h3 id="npu驱动更新步骤">NPU驱动更新步骤
+&lt;/h3>&lt;h4 id="pc机下载驱动压缩包">PC机下载驱动压缩包
+&lt;/h4>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git clone https://github.com/airockchip/rknn-llm.git
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>解压目录&lt;code>/rknn-llm-release-v1.2.1/rknpu-driver&lt;/code>下的&lt;code>rknpu_driver_0.9.8_20241009.tar.bz2&lt;/code>，后面会用到。&lt;/p>
+&lt;h4 id="编译内核前的环境配置参考香橙派文档">编译内核前的环境配置（参考香橙派文档）
+&lt;/h4>&lt;p>在linux环境下&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-SHELL" data-lang="SHELL">&lt;span class="line">&lt;span class="cl">sudo apt-get update
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt-get install -y git
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git clone https://github.com/orangepi-xunlong/orangepi-build.git -b next
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> orangepi-build
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo ./build.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>按以下选项配置&lt;/p>
+&lt;ol>
+&lt;li>选择 Kernel package（内核包）；&lt;/li>
+&lt;li>选择 do not change（不修改内核配置）&lt;/li>
+&lt;li>选择板卡 orangepi5；&lt;/li>
+&lt;li>选择第一项 current&lt;/li>
+&lt;/ol>
+&lt;p>关闭内核源码自动同步&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-SHELL" data-lang="SHELL">&lt;span class="line">&lt;span class="cl">sudo gedit userpatches/config-default.conf
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">IGNORE_UPDATES&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;yes&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h4 id="替换npu驱动并重新编译">替换NPU驱动并重新编译
+&lt;/h4>&lt;p>复制&lt;code>rknpu_driver_0.9.8_20241009.tar.bz2&lt;/code>解压出来的&lt;code>rknn-llm-release-v1.2.1/rknpu-driver/drivers/rknpu&lt;/code>下的文件到&lt;code>orangepi-build/kernel/orange-pi-6.1-rk35xx/drivers/rknpu&lt;/code>中。&lt;br>
+我这里重新编译的时候遇到了两处问题，这里先解决这两处问题再编译。&lt;/p>
+&lt;ol>
+&lt;li>修改&lt;code>orangepi-build/kernel/orange-pi-6.1-rk35xx/include/linux/mm.h&lt;/code>，添加以下代码
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-C++" data-lang="C++">&lt;span class="line">&lt;span class="cl">&lt;span class="k">static&lt;/span> &lt;span class="kr">inline&lt;/span> &lt;span class="kt">void&lt;/span> &lt;span class="nf">vm_flags_set&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">struct&lt;/span> &lt;span class="nc">vm_area_struct&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">vma&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">vm_flags_t&lt;/span> &lt;span class="n">flags&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">vma&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">vm_flags&lt;/span> &lt;span class="o">|=&lt;/span> &lt;span class="n">flags&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">static&lt;/span> &lt;span class="kr">inline&lt;/span> &lt;span class="kt">void&lt;/span> &lt;span class="nf">vm_flags_clear&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">struct&lt;/span> &lt;span class="nc">vm_area_struct&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">vma&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">vm_flags_t&lt;/span> &lt;span class="n">flags&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">vma&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">vm_flags&lt;/span> &lt;span class="o">&amp;amp;=&lt;/span> &lt;span class="o">~&lt;/span>&lt;span class="n">flags&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>直接搜索&lt;code>rknpu_devfreq.c&lt;/code>，注释掉第237行&lt;code>.set_soc_info = rockchip_opp_set_low_length&lt;/code>&lt;br>
+然后重新编译内核（同样按照上述配置）&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-SHELL" data-lang="SHELL">&lt;span class="line">&lt;span class="cl">sudo ./build.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>编译之后在路径&lt;code>orangepi-build/output/debs&lt;/code>会生成文件&lt;code>linux-image-current-rockchip-rk3588_1.1.8_arm64.deb&lt;/code>&lt;/p>
+&lt;h3 id="rk3588s开发板安装驱动">RK3588s开发板安装驱动
+&lt;/h3>&lt;p>在开发板上直接安装&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-SHELL" data-lang="SHELL">&lt;span class="line">&lt;span class="cl">sudo dpkg -i linux-image-current-rockchip-rk3588_1.1.8_arm64.deb
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>然后重启开发板。查看NPU驱动版本&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-SHELL" data-lang="SHELL">&lt;span class="line">&lt;span class="cl">sudo cat /sys/kernel/debug/rknpu/version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>显示0.9.8，则更新成功。&lt;/p>
+&lt;h2 id="pc机进行模型转换">PC机进行模型转换
+&lt;/h2>&lt;h3 id="rknn-llm">rknn-llm
+&lt;/h3>&lt;p>现在PC机创建虚拟环境，我这里用的python版本是3.10&lt;/p>
+&lt;p>克隆rknn-llm仓库，cd到目录下安装rknn-llm的whl文件&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">git clone https://github.com/airockchip/rknn-llm.git
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> rknn-llm/rkllm-toolkit
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">pip3 install rkllm_toolkit-1.2.1-cp310-cp310-linux_x86_64.whl
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="hugging-face下载模型权重">hugging face下载模型权重
+&lt;/h3>&lt;p>安装huggingface-cli，导入镜像源，下载模型权重&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-SHELL" data-lang="SHELL">&lt;span class="line">&lt;span class="cl">pip install -U huggingface_hub
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">export&lt;/span> &lt;span class="nv">HF_ENDPOINT&lt;/span>&lt;span class="o">=&lt;/span>https://hf-mirror.com
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">huggingface-cli download deepseek-ai/DeepSeek-R1-Distill-Qwen-7B --local-dir . --local-dir-use-symlinks False
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>参数&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>huggingface-cli download&lt;/code>&lt;/td>
+&lt;td>Hugging Face 官方命令行工具的下载命令&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>deepseek-ai/DeepSeek-R1-Distill-Qwen-7B&lt;/code>&lt;/td>
+&lt;td>要下载的模型标识符&lt;br>• &lt;code>deepseek-ai&lt;/code>：组织名称&lt;br>• &lt;code>DeepSeek-R1-Distill-Qwen-7B&lt;/code>：具体的模型名称&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--local-dir .&lt;/code>&lt;/td>
+&lt;td>指定下载到当前目录&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--local-dir-use-symlinks False&lt;/code>&lt;/td>
+&lt;td>禁用符号链接，直接复制文件到目标目录&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>如果不清楚模型名称，可以先去&lt;code>https://hf-mirror.com&lt;/code>，这里以Qwen3为例，搜索&lt;code>qwen3&lt;/code>，找到&lt;code>Qwen/Qwen3-0.6B&lt;/code>后点击进去，&lt;code>Qwen/Qwen3-0.6B&lt;/code>旁边有个复制按钮，这个就是我们要找的模型名称。&lt;/p>
+&lt;h3 id="模型权重转换">模型权重转换
+&lt;/h3>&lt;p>参考&lt;code>rknn-llm/examples/DeepSeek-R1-Distill-Qwen-1.5B_Demo/export/export_rkllm.py&lt;/code>，修改&lt;code>modelpath&lt;/code>为下载好的模型权重路径。执行&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-SHELL" data-lang="SHELL">&lt;span class="line">&lt;span class="cl">python export_rkllm.py
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;blockquote>
+&lt;p>如果遇到报错&lt;code>AttributeError: module ‘pyarrow‘ has no attribute ‘PyExtensionType‘. Did you mean: ‘ExtensionType‘&lt;/code>，可以尝试降低pyarrow的版本，我记得当时我是降版本了，但是现在查看环境的时候发现还是新的版本，这里仅做记录。&lt;/p>
+&lt;/blockquote>
+&lt;p>执行后得到rkllm文件&lt;/p>
+&lt;h2 id="开发板部署">开发板部署
+&lt;/h2>&lt;h3 id="编译">编译
+&lt;/h3>&lt;p>开发板同样要克隆rknn-llm仓库，稍后编译用。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">git clone https://github.com/airockchip/rknn-llm.git
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>参考&lt;code>rknn-llm/examples/DeepSeek-R1-Distill-Qwen-1.5B_Demo/deploy/build-linux.sh&lt;/code>，配置&lt;code>GCC_COMPILER_PATH&lt;/code>，做以下修改&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>&lt;span class="c1"># Debug / Release / RelWithDebInfo&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">set&lt;/span> -e
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="o">[[&lt;/span> -z &lt;span class="si">${&lt;/span>&lt;span class="nv">BUILD_TYPE&lt;/span>&lt;span class="si">}&lt;/span> &lt;span class="o">]]&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">BUILD_TYPE&lt;/span>&lt;span class="o">=&lt;/span>Release
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">GCC_COMPILER_PATH&lt;/span>&lt;span class="o">=&lt;/span>aarch64-linux-gnu
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">C_COMPILER&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">GCC_COMPILER_PATH&lt;/span>&lt;span class="si">}&lt;/span>-gcc
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">CXX_COMPILER&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">GCC_COMPILER_PATH&lt;/span>&lt;span class="si">}&lt;/span>-g++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">STRIP_COMPILER&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">GCC_COMPILER_PATH&lt;/span>&lt;span class="si">}&lt;/span>-strip
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">TARGET_ARCH&lt;/span>&lt;span class="o">=&lt;/span>aarch64
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">TARGET_PLATFORM&lt;/span>&lt;span class="o">=&lt;/span>linux
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="o">[[&lt;/span> -n &lt;span class="si">${&lt;/span>&lt;span class="nv">TARGET_ARCH&lt;/span>&lt;span class="si">}&lt;/span> &lt;span class="o">]]&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">TARGET_PLATFORM&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">TARGET_PLATFORM&lt;/span>&lt;span class="si">}&lt;/span>_&lt;span class="si">${&lt;/span>&lt;span class="nv">TARGET_ARCH&lt;/span>&lt;span class="si">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">ROOT_PWD&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="k">$(&lt;/span> &lt;span class="nb">cd&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="k">$(&lt;/span> dirname &lt;span class="nv">$0&lt;/span> &lt;span class="k">)&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="nb">cd&lt;/span> -P &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="k">$(&lt;/span> dirname &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$SOURCE&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="k">)&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="nb">pwd&lt;/span> &lt;span class="k">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">BUILD_DIR&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">ROOT_PWD&lt;/span>&lt;span class="si">}&lt;/span>/build/build_&lt;span class="si">${&lt;/span>&lt;span class="nv">TARGET_PLATFORM&lt;/span>&lt;span class="si">}&lt;/span>_&lt;span class="si">${&lt;/span>&lt;span class="nv">BUILD_TYPE&lt;/span>&lt;span class="si">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="o">[[&lt;/span> ! -d &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">BUILD_DIR&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">]]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> mkdir -p &lt;span class="si">${&lt;/span>&lt;span class="nv">BUILD_DIR&lt;/span>&lt;span class="si">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> &lt;span class="si">${&lt;/span>&lt;span class="nv">BUILD_DIR&lt;/span>&lt;span class="si">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cmake ../.. &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> -DCMAKE_SYSTEM_PROCESSOR&lt;span class="o">=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">TARGET_ARCH&lt;/span>&lt;span class="si">}&lt;/span> &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> -DCMAKE_SYSTEM_NAME&lt;span class="o">=&lt;/span>Linux &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> -DCMAKE_C_COMPILER&lt;span class="o">=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">C_COMPILER&lt;/span>&lt;span class="si">}&lt;/span> &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> -DCMAKE_CXX_COMPILER&lt;span class="o">=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">CXX_COMPILER&lt;/span>&lt;span class="si">}&lt;/span> &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> -DCMAKE_BUILD_TYPE&lt;span class="o">=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">BUILD_TYPE&lt;/span>&lt;span class="si">}&lt;/span> &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> -DCMAKE_POSITION_INDEPENDENT_CODE&lt;span class="o">=&lt;/span>ON
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">make -j4
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">make install
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>执行编译&lt;code>./build-linux.sh&lt;/code>&lt;/p>
+&lt;h3 id="部署测试">部署测试
+&lt;/h3>&lt;p>复制rkllm模型文件至目录&lt;code>rknn-llm/examples/DeepSeek-R1-Distill-Qwen-1.5B_Demo/deploy/&lt;/code>，同时进入该目录&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-SHELL" data-lang="SHELL">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">export&lt;/span> &lt;span class="nv">LD_LIBRARY_PATH&lt;/span>&lt;span class="o">=&lt;/span>./lib
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">./llm_demo ~/DeepSeek-R1-Distill-Qwen-1.5B_w4a16_RK3576.rkllm &lt;span class="m">128&lt;/span> &lt;span class="m">512&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;blockquote>
+&lt;p>我的开发板ram应该只有4G,实测4B以上模型直接重启，因此最多只测试了Qwen3-1.7B&lt;/p>
+&lt;/blockquote>
+&lt;hr>
+&lt;p>参考:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://www.cnblogs.com/yijunchenhui/p/19030693" target="_blank" rel="noopener"
+>香橙派 RK3588 部署 DeepSeek &lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://www.cnblogs.com/yijunchenhui/p/19027716" target="_blank" rel="noopener"
+>香橙派 RK3588 使用 RKLLM 更新 NPU 驱动教程&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://blog.csdn.net/weixin_44998018/article/details/149860806" target="_blank" rel="noopener"
+>AttributeError: module ‘pyarrow‘ has no attribute ‘PyExtensionType‘. Did you mean: ‘ExtensionType‘&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://blog.csdn.net/pkyang2004/article/details/147901802" target="_blank" rel="noopener"
+>RK3588成功部署 Qwen3-1.7B模型&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://doc.embedfire.com/linux/rk356x/Ai/zh/latest/lubancat_ai/example/deepseek.html#" target="_blank" rel="noopener"
+>Luban Cat DeepSeek-R1&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>【实践】Ubuntu20.04 Ollama+Dify Docker部署遇到的问题</title><link>https://laonafahaodange.github.io/p/practice-20250401/</link><pubDate>Tue, 01 Apr 2025 13:29:03 +0800</pubDate><guid>https://laonafahaodange.github.io/p/practice-20250401/</guid><description>&lt;img src="https://laonafahaodange.github.io/p/practice-20250401/cover.jpg" alt="Featured image of post 【实践】Ubuntu20.04 Ollama+Dify Docker部署遇到的问题" />&lt;h1 id="ubuntu2004-dify">Ubuntu20.04 Dify
+&lt;/h1>&lt;h2 id="安装docker">安装Docker
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-SHELL" data-lang="SHELL">&lt;span class="line">&lt;span class="cl">sudo apt update
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">curl -fsSL https://download.docker.com/linux/ubuntu/gpg &lt;span class="p">|&lt;/span> sudo apt-key add -
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo add-apt-repository &lt;span class="s2">&amp;#34;deb [arch=amd64] https://download.docker.com/linux/ubuntu &lt;/span>&lt;span class="k">$(&lt;/span>lsb_release -cs&lt;span class="k">)&lt;/span>&lt;span class="s2"> stable&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt update
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt install docker-ce docker-ce-cli containerd.io
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo systemctl status docker
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="安装docker-compose">安装Docker Compose
+&lt;/h2>&lt;p>version: 2.33.1&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-SHELL" data-lang="SHELL">&lt;span class="line">&lt;span class="cl">sudo curl -L &lt;span class="s2">&amp;#34;https://github.com/docker/compose/releases/download/v2.33.1/docker-compose-&lt;/span>&lt;span class="k">$(&lt;/span>uname -s&lt;span class="k">)&lt;/span>&lt;span class="s2">-&lt;/span>&lt;span class="k">$(&lt;/span>uname -m&lt;span class="k">)&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> -o /usr/local/bin/docker-compose
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo chmod +x /usr/local/bin/docker-compose
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker-compose --version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="运行dify">运行Dify
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-SHELL" data-lang="SHELL">&lt;span class="line">&lt;span class="cl">git clone https://github.com/langgenius/dify.git
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> docker
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cp .env.example .env
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo docker compose up -d
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>问题：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Error response from daemon: Get &amp;#34;https://registry-1.docker.io/v2/&amp;#34;: net/http: request canceled while waiting for connection (Client.Timeout exceeded while awaiting headers)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>解决方案:&lt;/p>
+&lt;p>&lt;code>sudo gedit /etc/docker/daemon.json&lt;/code>&lt;br>
+并添加：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;registry-mirrors&amp;#34;: [
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;https://docker.1ms.run&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;https://docker.xuanyuan.me&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">sudo&lt;/span> &lt;span class="n">systemctl&lt;/span> &lt;span class="n">daemon&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">reload&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">sudo&lt;/span> &lt;span class="n">systemctl&lt;/span> &lt;span class="n">restart&lt;/span> &lt;span class="n">docker&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>url: &lt;code>http://localhost/install&lt;/code>&lt;/p>
+&lt;h2 id="运行ollama">运行Ollama
+&lt;/h2>&lt;p>修改ollama service config文件中的&lt;code>port&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">[Unit]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Description=Ollama Service
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">After=network-online.target
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[Service]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ExecStart=/usr/bin/ollama serve
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">User=ollama
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Group=ollama
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Restart=always
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RestartSec=3
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Environment=&amp;#34;PATH=$PATH&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Environment=&amp;#34;OLLAMA_HOST=0.0.0.0:11451&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">OLLAMA_SCHED_SPREAD=1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[Install]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WantedBy=default.target
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>按照下面的方式运行ollama：&lt;code>OLLAMA_HOST=127.0.0.1:11451 ollama run qwq&lt;/code>&lt;/p>
+&lt;hr>
+&lt;p>参考:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://zhuanlan.zhihu.com/p/143156163" target="_blank" rel="noopener"
+>如何在 Ubuntu 20.04 上安装和使用 Docker&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://www.cnblogs.com/ltlearnweb/p/18751056" target="_blank" rel="noopener"
+>最新2025年docker 出现无法拉取docker: Error response from daemon: Get &amp;ldquo;https://registry-1.docker.io/v2/&amp;rdquo;: net/等问题&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://zhuanlan.zhihu.com/p/24461370776" target="_blank" rel="noopener"
+>Docker/DockerHub 国内镜像源/加速列表（3月6日更新-长期维护）&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>【实践】Ubuntu20.04 Ollama+Ragflow Docker部署遇到的问题</title><link>https://laonafahaodange.github.io/p/practice-20250331/</link><pubDate>Mon, 31 Mar 2025 18:07:50 +0800</pubDate><guid>https://laonafahaodange.github.io/p/practice-20250331/</guid><description>&lt;img src="https://laonafahaodange.github.io/p/practice-20250331/cover.jpg" alt="Featured image of post 【实践】Ubuntu20.04 Ollama+Ragflow Docker部署遇到的问题" />&lt;h1 id="ubuntu2004-ragflow">Ubuntu20.04 Ragflow
+&lt;/h1>&lt;h2 id="运行-ragflow">运行 Ragflow
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-SHELL" data-lang="SHELL">&lt;span class="line">&lt;span class="cl">git clone https://github.com/infiniflow/ragflow.git
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># check the value of vm.max_map_count&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sysctl vm.max_map_count
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Reset vm.max_map_count to a value at least 262144 if it is not.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo sysctl -w vm.max_map_count&lt;span class="o">=&lt;/span>&lt;span class="m">262144&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> ragflow/docker
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker compose -f docker-compose.yml up -d
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>问题:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-zed" data-lang="zed">&lt;span class="line">&lt;span class="cl">&lt;span class="n">WARN&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="err">0000&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">The&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="err">&amp;#34;&lt;/span>&lt;span class="n">HF_ENDPOINT&lt;/span>&lt;span class="err">&amp;#34;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">variable&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">is&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">not&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">set&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">Defaulting&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">to&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">a&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">blank&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="n">WARN&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="err">0000&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">The&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="err">&amp;#34;&lt;/span>&lt;span class="n">MACOS&lt;/span>&lt;span class="err">&amp;#34;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">variable&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">is&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">not&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">set&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">Defaulting&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">to&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">a&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">blank&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="n">unable&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">to&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">get&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">image&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="err">&amp;#39;&lt;/span>&lt;span class="nn">infiniflow/&lt;/span>&lt;span class="n">ragflow&lt;/span>&lt;span class="o">:&lt;/span>&lt;span class="n">v0&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="err">17&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="err">2&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">slim&lt;/span>&lt;span class="err">&amp;#39;&lt;/span>&lt;span class="o">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kd">permission&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">denied&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">while&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">trying&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">to&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">connect&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">to&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">the&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">Docker&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">daemon&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">socket&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">at&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">unix&lt;/span>&lt;span class="o">:&lt;/span>&lt;span class="c1">///var/run/docker.sock: Get &amp;#34;http://%2Fvar%2Frun%2Fdocker.sock/v1.48/images/infiniflow/ragflow:v0.17.2-slim/json&amp;#34;: dial unix /var/run/docker.sock: connect: permission denied
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>解决方案:&lt;br>
+修改 &lt;code>.env&lt;/code> 文件&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">RAGFLOW_IMAGE=registry.cn-hangzhou.aliyuncs.com/infiniflow/ragflow:nightly-slim
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>执行&lt;code>docker compose -f docker-compose.yml up -d&lt;/code>前应该加上&lt;code>sudo&lt;/code>&lt;br>
+此时又出现另外的问题：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Error response from daemon: failed to set up container networking: driver failed programming external connectivity on endpoint ragflow-server (a3b939ad7640ae72035b928e912fcae6dddf16255151ca80a62d22d8760a0e49): Bind for 0.0.0.0:80 failed: port is already allocated
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>可能是因为我以docker方式运行了ragflow&amp;hellip;?&lt;/p>
+&lt;p>解决方案:&lt;br>
+修改 &lt;code>ragflow-main\docker\docker-compose.yml&lt;/code> 中关于 &lt;code>ports&lt;/code> 的部分&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># from
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ports:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - ${SVR_HTTP_PORT}:9380
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - 80:80
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - 443:443
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># to
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ports:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - ${SVR_HTTP_PORT}:9380
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - 8880:80
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - 4443:443
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>url: &lt;code>http://localhost:8880/login&lt;/code>&lt;/p>
+&lt;h2 id="运行-ollama">运行 Ollama
+&lt;/h2>&lt;p>我改变了&lt;code>port&lt;/code>端口号然后发现一些问题，下面是我的ollama service config文件：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">[Unit]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Description=Ollama Service
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">After=network-online.target
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[Service]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ExecStart=/usr/bin/ollama serve
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">User=ollama
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Group=ollama
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Restart=always
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RestartSec=3
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Environment=&amp;#34;PATH=$PATH&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Environment=&amp;#34;OLLAMA_HOST=0.0.0.0:11451&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">OLLAMA_SCHED_SPREAD=1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[Install]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WantedBy=default.target
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>我需要以这样的方式运行ollama：&lt;code>OLLAMA_HOST=127.0.0.1:11451 ollama run qwq&lt;/code>，这是可行的，但是还不清楚原因。&lt;/p>
+&lt;p>还需要一个嵌入模型：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="nv">OLLAMA_HOST&lt;/span>&lt;span class="o">=&lt;/span>127.0.0.1:11451 ollama pull shaw/dmeta-embedding-zh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>但是还是无法配置ragflow页面中的嵌入模型。&lt;br>
+尝试修改 &lt;code>.env&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># from
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RAGFLOW_IMAGE=registry.cn-hangzhou.aliyuncs.com/infiniflow/ragflow:v0.17.2-slim
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># to
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RAGFLOW_IMAGE=registry.cn-hangzhou.aliyuncs.com/infiniflow/ragflow:v0.17.2
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;hr>
+&lt;p>参考:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://zhuanlan.zhihu.com/p/18597188854" target="_blank" rel="noopener"
+>RagFlow 部署指南 - 直接拉取镜像&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://blog.csdn.net/qq_31400983/article/details/142736594?fromshare=blogdetail&amp;amp;sharetype=blogdetail&amp;amp;sharerId=142736594&amp;amp;sharerefer=PC&amp;amp;sharesource=laonafahaodange&amp;amp;sharefrom=from_link" target="_blank" rel="noopener"
+>大模型（deepseek）之LLM+RAG构建本地化知识库应用（Ollama+Deepseek+RAGFlow）&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>【实践】关于gradio Image模块的一些坑</title><link>https://laonafahaodange.github.io/p/practice-20240831/</link><pubDate>Sat, 31 Aug 2024 18:07:50 +0800</pubDate><guid>https://laonafahaodange.github.io/p/practice-20240831/</guid><description>&lt;img src="https://laonafahaodange.github.io/p/practice-20240831/cover.jpg" alt="Featured image of post 【实践】关于gradio Image模块的一些坑" />&lt;h1 id="起因">起因
+&lt;/h1>&lt;p>起因是用gradio做yolov10的展示demo时，发现onnx模型推理输出总是为空，排除了输入问题以后，突然想起来上次做的一个项目也有类似的情况。于是怀疑是不是同一个原因，经过实验发现确实如此。简单记录一下这个坑。&lt;/p>
+&lt;h1 id="坑">坑
+&lt;/h1>&lt;p>博主习惯使用opencv处理图像，于是初始化gradio的Image模块时指定输入类型为&lt;code>numpy&lt;/code>，然后交由&lt;code>defect_detection&lt;/code>函数进行推理，如下：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-PYTHON" data-lang="PYTHON">&lt;span class="line">&lt;span class="cl">&lt;span class="n">input_img&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">gr&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Image&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">type&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;numpy&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">label&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;输入图像&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">interactive&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="kc">True&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">input_img&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">upload&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">defect_detection&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">inputs&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">input_img&lt;/span>&lt;span class="p">],&lt;/span> &lt;span class="n">outputs&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">output_img&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">output_text&lt;/span>&lt;span class="p">])&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>这时候理所当然的就在&lt;code>defect_detection&lt;/code>函数中对输入的图像套用推理函数直接推理，例如：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-PYTHON" data-lang="PYTHON">&lt;span class="line">&lt;span class="cl">&lt;span class="n">image_shape&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">input_img&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">shape&lt;/span>&lt;span class="p">[:&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">blob&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">preprocess&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">input_img&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">input_shape&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">outs&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">onnx_model&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">run&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">None&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="s1">&amp;#39;images&amp;#39;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">blob&lt;/span>&lt;span class="p">})[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">][&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">boxes&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">scores&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">labels&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">postprocess&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">outs&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">conf_thres&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">image_shape&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">input_shape&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 保存结果&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">for&lt;/span> &lt;span class="n">label&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">score&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">box&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="nb">zip&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">labels&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">scores&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">boxes&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">label_text&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sa">f&lt;/span>&lt;span class="s1">&amp;#39;&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">label_name&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">label&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s1">: &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">score&lt;/span>&lt;span class="si">:&lt;/span>&lt;span class="s1">.2f&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s1">&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">color&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">colors&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">label&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kc">True&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cv&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rectangle&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">input_img&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">box&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">],&lt;/span> &lt;span class="n">box&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">]),&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">box&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">],&lt;/span> &lt;span class="n">box&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">]),&lt;/span> &lt;span class="n">color&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">thickness&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">lineType&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">cv&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">LINE_AA&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cv&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">putText&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">input_img&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">label_text&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">box&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">],&lt;/span> &lt;span class="n">box&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="n">cv&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">FONT_HERSHEY_SIMPLEX&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mf">0.5&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">color&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>上述代码来源于yolov10的onnx推理部分，网上搜索即可找到。&lt;br>
+但是这个时候会发现一个问题，推理代码&lt;code>outs&lt;/code>的输出部分总是为空。&lt;br>
+&lt;strong>这时候考虑到yolov10在训练的时候图像格式是bgr，可能是推理时输入rgb格式的图像导致推理不出结果。于是对输入图像手动进行一次格式转换，代码如下：&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-PYTHON" data-lang="PYTHON">&lt;span class="line">&lt;span class="cl">&lt;span class="n">input_img&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">cv&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cvtColor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">input_img&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">cv&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">COLOR_RGB2BGR&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1"># 手动转换一下格式&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">image_shape&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">input_img&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">shape&lt;/span>&lt;span class="p">[:&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">blob&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">preprocess&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">input_img&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">input_shape&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">outs&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">onnx_model&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">run&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">None&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="s1">&amp;#39;images&amp;#39;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">blob&lt;/span>&lt;span class="p">})[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">][&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">boxes&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">scores&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">labels&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">postprocess&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">outs&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">conf_thres&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">image_shape&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">input_shape&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 保存结果&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">for&lt;/span> &lt;span class="n">label&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">score&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">box&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="nb">zip&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">labels&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">scores&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">boxes&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">label_text&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sa">f&lt;/span>&lt;span class="s1">&amp;#39;&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">label_name&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">label&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s1">: &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">score&lt;/span>&lt;span class="si">:&lt;/span>&lt;span class="s1">.2f&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s1">&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">color&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">colors&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">label&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kc">True&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cv&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rectangle&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">input_img&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">box&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">],&lt;/span> &lt;span class="n">box&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">]),&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">box&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">],&lt;/span> &lt;span class="n">box&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">]),&lt;/span> &lt;span class="n">color&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">thickness&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">lineType&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">cv&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">LINE_AA&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cv&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">putText&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">input_img&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">label_text&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">box&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">],&lt;/span> &lt;span class="n">box&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="n">cv&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">FONT_HERSHEY_SIMPLEX&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mf">0.5&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">color&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;strong>问题解决，但是这个时候又遇到Image模块显示有问题，看色调明显推测是通道顺序的问题，于是再进行一次格式转换，将bgr格式转为rgb格式。代码如下：&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-PYTHON" data-lang="PYTHON">&lt;span class="line">&lt;span class="cl">&lt;span class="n">input_img&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">cv&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cvtColor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">input_img&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">cv&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">COLOR_RGB2BGR&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1"># 手动转换一下格式&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">image_shape&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">input_img&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">shape&lt;/span>&lt;span class="p">[:&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">blob&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">preprocess&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">input_img&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">input_shape&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">outs&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">onnx_model&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">run&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">None&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="s1">&amp;#39;images&amp;#39;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">blob&lt;/span>&lt;span class="p">})[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">][&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">boxes&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">scores&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">labels&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">postprocess&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">outs&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">conf_thres&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">image_shape&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">input_shape&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 保存结果&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">for&lt;/span> &lt;span class="n">label&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">score&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">box&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="nb">zip&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">labels&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">scores&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">boxes&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">label_text&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sa">f&lt;/span>&lt;span class="s1">&amp;#39;&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">label_name&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">label&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s1">: &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">score&lt;/span>&lt;span class="si">:&lt;/span>&lt;span class="s1">.2f&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s1">&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">color&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">colors&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">label&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kc">True&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cv&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rectangle&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">input_img&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">box&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">],&lt;/span> &lt;span class="n">box&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">]),&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">box&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">],&lt;/span> &lt;span class="n">box&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">]),&lt;/span> &lt;span class="n">color&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">thickness&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">lineType&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">cv&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">LINE_AA&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cv&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">putText&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">input_img&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">label_text&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">box&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">],&lt;/span> &lt;span class="n">box&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="n">cv&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">FONT_HERSHEY_SIMPLEX&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mf">0.5&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">color&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">input_img&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">cv&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cvtColor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">input_img&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">cv&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">COLOR_BGR2RGB&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1"># 手动转换一下格式&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>显示的问题解决。&lt;/p>
+&lt;h1 id="总结">总结
+&lt;/h1>&lt;p>使用gradio的Image模块时，在设置输入格式为&lt;code>numpy&lt;/code>的情况下，如果需要对输入的图像进行处理，注意gradio默认图像的通道顺序是rgb。包括显示的通道顺序也是rgb。如果程序需要处理其他格式的图像，则需要手动对图像进行格式转换。&lt;/p></description></item></channel></rss>

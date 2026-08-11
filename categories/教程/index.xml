@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>教程 on 老衲法号蛋哥</title><link>https://laonafahaodange.github.io/categories/%E6%95%99%E7%A8%8B/</link><description>Recent content in 教程 on 老衲法号蛋哥</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>老衲法号蛋哥</copyright><lastBuildDate>Thu, 08 Jan 2026 23:32:04 +0800</lastBuildDate><atom:link href="https://laonafahaodange.github.io/categories/%E6%95%99%E7%A8%8B/index.xml" rel="self" type="application/rss+xml"/><item><title>Ubuntu yt6801 有线网卡驱动安装</title><link>https://laonafahaodange.github.io/p/tutorial-20260108/</link><pubDate>Thu, 08 Jan 2026 23:32:04 +0800</pubDate><guid>https://laonafahaodange.github.io/p/tutorial-20260108/</guid><description>&lt;img src="https://laonafahaodange.github.io/p/tutorial-20260108/cover.jpg" alt="Featured image of post Ubuntu yt6801 有线网卡驱动安装" />&lt;h1 id="ubuntu-yt6801-有线网卡驱动安装">Ubuntu yt6801 有线网卡驱动安装
+&lt;/h1>&lt;p>机械革命极光X安装Ubuntu后有概率会掉有线网卡的驱动，经过查询发现有线网卡的型号是yt6801，有幸发现一篇文章介绍了如何在Ubuntu系统下安装yt6801有线网卡的驱动。故记录。&lt;/p>
+&lt;ol>
+&lt;li>通过链接&lt;a class="link" href="https://www.motor-comm.com/download?kw=yt6801&amp;amp;category=&amp;amp;wd=1&amp;amp;tp=1" target="_blank" rel="noopener"
+>https://www.motor-comm.com/download?kw=yt6801&amp;amp;category=&amp;amp;wd=1&amp;amp;tp=1&lt;/a>下载驱动&lt;code>yt6801-linux-driver-1.0.31&lt;/code>&lt;/li>
+&lt;li>解压&lt;/li>
+&lt;li>按顺序执行以下命令安装驱动
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-SHELL" data-lang="SHELL">&lt;span class="line">&lt;span class="cl">sudo su
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">./yt_nic_install.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;p>参考：&lt;/p>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://blog.csdn.net/2402_87385120/article/details/144120078?fromshare=blogdetail&amp;amp;sharetype=blogdetail&amp;amp;sharerId=144120078&amp;amp;sharerefer=PC&amp;amp;sharesource=laonafahaodange&amp;amp;sharefrom=from_link" target="_blank" rel="noopener"
+>yt6801 ubuntu有线连接驱动安装&lt;/a>&lt;/li>
+&lt;/ul></description></item></channel></rss>

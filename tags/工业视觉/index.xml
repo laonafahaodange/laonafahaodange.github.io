@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>工业视觉 on 老衲法号蛋哥</title><link>https://laonafahaodange.github.io/tags/%E5%B7%A5%E4%B8%9A%E8%A7%86%E8%A7%89/</link><description>Recent content in 工业视觉 on 老衲法号蛋哥</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>老衲法号蛋哥</copyright><lastBuildDate>Sat, 12 Apr 2025 20:44:18 +0800</lastBuildDate><atom:link href="https://laonafahaodange.github.io/tags/%E5%B7%A5%E4%B8%9A%E8%A7%86%E8%A7%89/index.xml" rel="self" type="application/rss+xml"/><item><title>【随笔】第三届全国技能大赛选拔赛参赛工业视觉赛项经历</title><link>https://laonafahaodange.github.io/p/informal-essay-20250412/</link><pubDate>Sat, 12 Apr 2025 20:44:18 +0800</pubDate><guid>https://laonafahaodange.github.io/p/informal-essay-20250412/</guid><description>&lt;img src="https://laonafahaodange.github.io/p/informal-essay-20250412/cover.jpg" alt="Featured image of post 【随笔】第三届全国技能大赛选拔赛参赛工业视觉赛项经历" />&lt;h1 id="随笔">随笔
+&lt;/h1>&lt;h2 id="平台">平台
+&lt;/h2>&lt;p>肯拓、vision master、西门子PLC、越疆机械臂&lt;/p>
+&lt;h2 id="赛题内容">赛题内容
+&lt;/h2>&lt;p>由于赛题不公开，而且没有样题，只根据平台在网上找到了两份近似的题目。可做参考&lt;br>
+&lt;a class="link" href="https://www.docin.com/p-4773392726.html" target="_blank" rel="noopener"
+>https://www.docin.com/p-4773392726.html&lt;/a>&lt;br>
+&lt;a class="link" href="https://www.docin.com/p-4773392725.html?docfrom=rrela" target="_blank" rel="noopener"
+>https://www.docin.com/p-4773392725.html?docfrom=rrela&lt;/a>&lt;/p>
+&lt;h2 id="过程">过程
+&lt;/h2>&lt;h3 id="报道当天">报道当天
+&lt;/h3>&lt;p>4月8日报道，比赛共9-10号两天，分为两个模块。47人报名实际参赛17人。&lt;br>
+比赛内容由于赛前没有公开，都是报道那天的下午才去看了下设备，由于平台更换以及PLC苦手，见到设备的当天基本就知道自己没有戏了（此前也参加过该赛道的比赛，但是由于赛前有培训以及不需要PLC知识，因此这次也报名了这个赛项）。还好教了下怎么开机，不然第二天比赛可能怎么开机都不懂&amp;hellip;&lt;/p>
+&lt;h3 id="第一天">第一天
+&lt;/h3>&lt;p>第一天模块一，共一个半小时，主要内容是相机镜头光源的选型安装、工作距离的计算、vision master使用（拖拽式流程以及界面设计）、PLC编程、HMI界面设计、IP配置。&lt;br>
+视觉任务有蛮多的，瓶盖二维码检测、图钉计数颜色识别等。一个半小时下来只做了选型安装（安装还装错了，选是选对了）和部分IP设置。评分时由于没戴安全帽和穿绝缘鞋被扣了分，然后还有因为镜头选错、相机安装错、试卷上要求写编号而我写了型号、光源不会开导致判定拍照不清晰等扣分。至于赛题后面的视觉任务也是一道没做。&lt;/p>
+&lt;h3 id="第二天">第二天
+&lt;/h3>&lt;p>第二天模块二，共一个小时。主要考察机械臂的使用。相比于第一天，第二天的摄像头是已经装好的，因此前面的部分基本差不多，主要是多了个机械臂IP的配置。任务大概是驱动物料传递模块和传送带，把物料送到视觉模块，然后调用机械臂实现物料分拣到相应的板块上。&lt;br>
+第二天主要时间花在了如何配置机械臂的IP上，有个坑就是机械臂的控制柜默认绑定的IP是固定的，首次使用时需要修改电脑IP和控制柜一个网段才能配置。我当时是先改了电脑IP，发现机械臂控制软件的设置很多都变灰了。后面是先把电脑IP改回来了才修改得机械臂的IP。PLC部分还是不会做，因此在结束以前研究了一下vision master，按照自己的想法试了一下二维码检测部分，但是最终也没得分。&lt;br>
+第一天吃亏了因此第二天老实戴了安全帽，但是还是扣了绝缘鞋的分。然后视觉任务、机械臂还是不会做，拿了部分IP配置的分。&lt;/p>
+&lt;h3 id="成绩">成绩
+&lt;/h3>&lt;p>最终排名第15，倒数第二，本来以为倒数第一的&amp;hellip;不过还是好难看啊&amp;hellip;&lt;/p>
+&lt;h2 id="感想">感想
+&lt;/h2>&lt;p>下次不报这个赛项了，感觉这次比赛蛮多赛项都是PLC的。下次应该多和同事交流一下内容已经经历，防止踩坑。或者抱一抱老师傅的大腿，参加一些双人赛，优势互补也会好一些。&lt;/p></description></item></channel></rss>
